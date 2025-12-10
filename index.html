@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ficha — Véu Oculto RPG</title>
+
+<style>
+    body {
+        background: #111;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    h1, h2, h3 {
+        color: #7bcfff;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 850px;
+        margin: auto;
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px #0af;
+    }
+
+    .section {
+        background: #222;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 12px;
+        border-left: 4px solid #0af;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input, textarea {
+        width: 100%;
+        background: #333;
+        color: #fff;
+        padding: 8px;
+        border: none;
+        border-radius: 8px;
+        margin: 6px 0 15px 0;
+    }
+
+    textarea {
+        height: 70px;
+        resize: none;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    td, th {
+        border: 1px solid #444;
+        padding: 8px;
+        text-align: center;
+        background: #333;
+    }
+
+    th {
+        background: #0a4b7a;
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>Ficha — Véu Oculto RPG</h1>
+
+<!-- IDENTIDADE -->
+<div class="section">
+    <h2>Identidade</h2>
+    <label>Nome:</label><input>
+    <label>Idade:</label><input>
+    <label>Ocupação:</label><input>
+    <label>Origem / Antecedente:</label><input>
+    <label>Especialidade / Classe:</label><input>
+    <label>Caminho do Oculto:</label><input>
+</div>
+
+<!-- ATRIBUTOS -->
+<div class="section">
+    <h2>Atributos</h2>
+    <table>
+        <tr><th>Atributo</th><th>Valor</th></tr>
+        <tr><td>Força</td><td><input></td></tr>
+        <tr><td>Agilidade</td><td><input></td></tr>
+        <tr><td>Presença</td><td><input></td></tr>
+        <tr><td>Intelecto</td><td><input></td></tr>
+        <tr><td>Vigor</td><td><input></td></tr>
+    </table>
+</div>
+
+<!-- RECURSOS -->
+<div class="section">
+    <h2>Recursos</h2>
+    <table>
+        <tr><th>Recurso</th><th>Fórmula</th><th>Valor</th></tr>
+        <tr><td>PV</td><td>10 + (Vigor × 3)</td><td><input></td></tr>
+        <tr><td>PS (Sanidade)</td><td>10 + (Presença + Intelecto)</td><td><input></td></tr>
+        <tr><td>PE</td><td>Fixos: 5</td><td>5</td></tr>
+    </table>
+</div>
+
+<!-- PERICIAS -->
+<div class="section">
+    <h2>Perícias</h2>
+
+    <h3>Força</h3>
+    <label><input type="checkbox"> Atletismo</label><br>
+    <label><input type="checkbox"> Briga</label><br>
+    <label><input type="checkbox"> Intimidação</label><br>
+    <label><input type="checkbox"> Sobrevivência</label><br>
+
+    <h3>Agilidade</h3>
+    <label><input type="checkbox"> Furtividade</label><br>
+    <label><input type="checkbox"> Crime</label><br>
+    <label><input type="checkbox"> Pontaria</label><br>
+    <label><input type="checkbox"> Reflexos</label><br>
+
+    <h3>Presença</h3>
+    <label><input type="checkbox"> Diplomacia</label><br>
+    <label><input type="checkbox"> Enganação</label><br>
+    <label><input type="checkbox"> Intuição</label><br>
+    <label><input type="checkbox"> Percepção</label><br>
+
+    <h3>Intelecto</h3>
+    <label><input type="checkbox"> Medicina</label><br>
+    <label><input type="checkbox"> Investigação</label><br>
+    <label><input type="checkbox"> Ocultismo</label><br>
+    <label><input type="checkbox"> Tecnologia</label><br>
+
+    <h3>Vigor</h3>
+    <label><input type="checkbox"> Resistência</label><br>
+    <label><input type="checkbox"> Vigor Físico</label><br>
+    <label><input type="checkbox"> Fôlego</label><br>
+    <label><input type="checkbox"> Tolerância</label><br>
+</div>
+
+<!-- COMBATE -->
+<div class="section">
+    <h2>Combate</h2>
+    <label>Iniciativa:</label><input placeholder="1d20 + Agilidade">
+
+    <h3>Ataques</h3>
+    <table>
+        <tr><th>Arma</th><th>Dano</th><th>Alcance</th><th>Obs</th></tr>
+        <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+        <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+    </table>
+</div>
+
+<!-- RITUAIS -->
+<div class="section">
+    <h2>Rituais</h2>
+    <table>
+        <tr><th>Ritual</th><th>Caminho</th><th>Custo</th><th>Efeito</th></tr>
+        <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+        <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+    </table>
+</div>
+
+<!-- INVENTÁRIO -->
+<div class="section">
+    <h2>Inventário</h2>
+    <label>Capacidade de Carga:</label><input placeholder="5 + Força">
+
+    <table>
+        <tr><th>Item</th><th>Peso</th><th>Obs</th></tr>
+        <tr><td><input></td><td><input></td><td><input></td></tr>
+        <tr><td><input></td><td><input></td><td><input></td></tr>
+    </table>
+</div>
+
+<!-- TRAUMA -->
+<div class="section">
+    <h2>Tragédia / Trauma</h2>
+    <textarea></textarea>
+</div>
+
+<!-- ANOTAÇÕES -->
+<div class="section">
+    <h2>Anotações</h2>
+    <textarea></textarea>
+</div>
+
+</div>
+</body>
+</html>
