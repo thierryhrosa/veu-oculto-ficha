@@ -254,22 +254,29 @@
         });
     });
 
-    /* FOTO DO PERSONAGEM */
+    /* FOTO DO PERSONAGEM (com esconder input) */
     const fotoInput = document.getElementById("fotoInput");
     const fotoImg = document.getElementById("fotoImg");
 
     fotoInput.addEventListener("change", () => {
         const file = fotoInput.files[0];
         const reader = new FileReader();
+        
         reader.onload = () => {
             fotoImg.src = reader.result;
             localStorage.setItem("foto", reader.result);
+
+            // esconder input após selecionar
+            fotoInput.style.display = "none";
         };
+
         reader.readAsDataURL(file);
     });
 
+    // se já tiver foto salva, esconder input
     if (localStorage.getItem("foto")) {
         fotoImg.src = localStorage.getItem("foto");
+        fotoInput.style.display = "none";
     }
 
     /* SALVAMENTO AUTOMÁTICO */
