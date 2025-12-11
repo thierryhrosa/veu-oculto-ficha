@@ -1,38 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ficha OP — Personagem</title>
-
+<meta charset="UTF-8">
+<title>Ficha Ordem Paranormal</title>
 <style>
     body {
-        background: #0e0e0e;
+        background: #111;
         color: white;
-        font-family: Arial, Helvetica, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-
-    h1 {
-        text-align: center;
+        font-family: Arial, sans-serif;
+        margin: 20px;
     }
 
     .container {
-        max-width: 900px;
+        max-width: 700px;
         margin: auto;
+        background: #222;
         padding: 20px;
+        border-radius: 10px;
     }
 
-    /* Foto */
     .foto-box {
-        width: 200px;
-        height: 200px;
-        margin: auto;
-        border-radius: 10px;
+        width: 180px;
+        height: 180px;
+        border: 2px solid #555;
+        background: #000;
+        margin-bottom: 10px;
         overflow: hidden;
-        border: 2px solid #e63946;
-        background: #222;
     }
 
     .foto-box img {
@@ -41,255 +34,130 @@
         object-fit: cover;
     }
 
-    .foto-input {
-        text-align: center;
+    #fotoInput {
+        display: block;
         margin-top: 10px;
     }
 
-    /* Abas */
-    .tabs {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-    .tab {
-        padding: 10px 20px;
-        background: #1b1b1b;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-    .tab.active {
-        background: #e63946;
-    }
-
-    .tab-content {
+    #trocarFotoBtn {
         display: none;
-        background: #151515;
-        padding: 20px;
-        border-radius: 10px;
-    }
-    .tab-content.active {
-        display: block;
-    }
-
-    input, select, textarea {
-        width: 100%;
-        padding: 8px;
-        background: #222;
-        border: 1px solid #444;
+        margin-top: 10px;
+        padding: 8px 10px;
+        background: #444;
+        border: none;
         color: white;
-        border-radius: 4px;
-        margin-bottom: 10px;
+        cursor: pointer;
+        border-radius: 5px;
     }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-
-    .attr-box {
-        background: #0f0f0f;
-        padding: 10px;
-        border-radius: 8px;
-        text-align: center;
+    /* Barras PV (vermelho) e PS (azul) */
+    .barra {
+        width: 100%;
+        height: 20px;
+        background: #333;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 5px;
+        margin-bottom: 15px;
     }
 
-    .attr-box input {
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
+    .pvFill {
+        height: 100%;
+        background: red;
+        width: 100%;
     }
 
-    .section-title {
-        font-size: 18px;
-        margin-bottom: 10px;
-        border-left: 4px solid #e63946;
-        padding-left: 10px;
+    .psFill {
+        height: 100%;
+        background: #2196f3;
+        width: 100%;
     }
+
 </style>
-
 </head>
 <body>
 
 <div class="container">
 
-    <h1>Ficha de Personagem — Ordem Paranormal</h1>
+    <h2>Ficha Ordem Paranormal</h2>
 
-    <!-- FOTO DO PERSONAGEM -->
-    <div class="foto-box" id="fotoPreview">
-        <img id="fotoImg" src="">
+    <!-- FOTO -->
+    <div class="foto-box">
+        <img id="fotoImg" src="" alt="">
     </div>
 
-    <div class="foto-input">
-        <input type="file" id="fotoInput" accept="image/*">
+    <input type="file" id="fotoInput" accept="image/*">
+    <button id="trocarFotoBtn">Trocar Foto</button>
+
+    <hr>
+
+    <!-- PV -->
+    <label>PV:</label>
+    <div class="barra">
+        <div class="pvFill" id="pvBar"></div>
     </div>
+    <input type="number" id="pv" placeholder="PV Atual" min="0" value="100">
 
-    <!-- Abas -->
-    <div class="tabs">
-        <div class="tab active" data-tab="status">Status</div>
-        <div class="tab" data-tab="atributos">Atributos</div>
-        <div class="tab" data-tab="pericias">Perícias</div>
-        <div class="tab" data-tab="inventario">Inventário</div>
-        <div class="tab" data-tab="combate">Combate</div>
-        <div class="tab" data-tab="historia">História</div>
+    <!-- PS -->
+    <label>PS:</label>
+    <div class="barra">
+        <div class="psFill" id="psBar"></div>
     </div>
-
-    <!-- STATUS -->
-    <div class="tab-content active" id="status">
-        <div class="grid-2">
-            <div>
-                <label>Nome</label>
-                <input class="save" id="nome" type="text">
-            </div>
-            <div>
-                <label>Classe</label>
-                <input class="save" id="classe" type="text">
-            </div>
-        </div>
-
-        <div class="grid-2">
-            <div>
-                <label>Origem</label>
-                <input class="save" id="origem" type="text">
-            </div>
-            <div>
-                <label>Trilha</label>
-                <input class="save" id="trilha" type="text">
-            </div>
-        </div>
-
-        <div class="grid-3">
-            <div>
-                <label>Vida</label>
-                <input class="save" id="vida" type="number" value="20">
-            </div>
-            <div>
-                <label>Sanidade</label>
-                <input class="save" id="sanidade" type="number" value="20">
-            </div>
-            <div>
-                <label>PE (Esforço)</label>
-                <input class="save" id="pe" type="number" value="5">
-            </div>
-        </div>
-    </div>
-
-    <!-- ATRIBUTOS -->
-    <div class="tab-content" id="atributos">
-        <div class="section-title">Atributos</div>
-        <div class="grid-4">
-            <div class="attr-box">
-                Força
-                <input class="save" id="forca" type="number" value="1">
-            </div>
-            <div class="attr-box">
-                Agilidade
-                <input class="save" id="agilidade" type="number" value="1">
-            </div>
-            <div class="attr-box">
-                Intelecto
-                <input class="save" id="intelecto" type="number" value="1">
-            </div>
-            <div class="attr-box">
-                Presença
-                <input class="save" id="presenca" type="number" value="1">
-            </div>
-        </div>
-    </div>
-
-    <!-- PERICIAS -->
-    <div class="tab-content" id="pericias">
-        <div class="section-title">Perícias</div>
-        <div class="grid-2">
-            <div><label>Atletismo</label><input class="save" id="atl" type="number" value="0"></div>
-            <div><label>Reflexos</label><input class="save" id="ref" type="number" value="0"></div>
-            <div><label>Percepção</label><input class="save" id="per" type="number" value="0"></div>
-            <div><label>Intimidação</label><input class="save" id="intim" type="number" value="0"></div>
-            <div><label>Investigação</label><input class="save" id="inv" type="number" value="0"></div>
-            <div><label>Mira</label><input class="save" id="mira" type="number" value="0"></div>
-            <div><label>Ocultismo</label><input class="save" id="ocul" type="number" value="0"></div>
-            <div><label>Vontade</label><input class="save" id="vont" type="number" value="0"></div>
-        </div>
-    </div>
-
-    <!-- INVENTARIO -->
-    <div class="tab-content" id="inventario">
-        <textarea class="save" id="invTxt" rows="10" placeholder="Armas, Itens, Equipamentos..."></textarea>
-    </div>
-
-    <!-- COMBATE -->
-    <div class="tab-content" id="combate">
-        <div class="grid-3">
-            <div><label>Ataque</label><input class="save" id="atk" type="text"></div>
-            <div><label>Dano</label><input class="save" id="dano" type="text"></div>
-            <div><label>Alcance</label><input class="save" id="alc" type="text"></div>
-        </div>
-        <div class="grid-3">
-            <div><label>Defesa</label><input class="save" id="def" type="number"></div>
-            <div><label>Bloqueio</label><input class="save" id="bloq" type="number"></div>
-            <div><label>Esquiva</label><input class="save" id="esq" type="number"></div>
-        </div>
-    </div>
-
-    <!-- HISTORIA -->
-    <div class="tab-content" id="historia">
-        <textarea class="save" id="hist" rows="10" placeholder="História, Personalidade, Segredos..."></textarea>
-    </div>
+    <input type="number" id="ps" placeholder="PS Atual" min="0" value="100">
 
 </div>
 
 <script>
-    /* TROCA DE ABAS */
-    const tabs = document.querySelectorAll(".tab");
-    const contents = document.querySelectorAll(".tab-content");
+/* FOTO DO PERSONAGEM */
+const fotoInput = document.getElementById("fotoInput");
+const fotoImg = document.getElementById("fotoImg");
+const trocarBtn = document.getElementById("trocarFotoBtn");
 
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            tabs.forEach(t => t.classList.remove("active"));
-            contents.forEach(c => c.classList.remove("active"));
-
-            tab.classList.add("active");
-            document.getElementById(tab.dataset.tab).classList.add("active");
-        });
-    });
-
-    /* FOTO DO PERSONAGEM (com esconder input) */
-    const fotoInput = document.getElementById("fotoInput");
-    const fotoImg = document.getElementById("fotoImg");
-
-    fotoInput.addEventListener("change", () => {
-        const file = fotoInput.files[0];
-        const reader = new FileReader();
-        
-        reader.onload = () => {
-            fotoImg.src = reader.result;
-            localStorage.setItem("foto", reader.result);
-
-            // esconder input após selecionar
-            fotoInput.style.display = "none";
-        };
-
-        reader.readAsDataURL(file);
-    });
-
-    // se já tiver foto salva, esconder input
-    if (localStorage.getItem("foto")) {
-        fotoImg.src = localStorage.getItem("foto");
+function carregarFotoSalva() {
+    const salvada = localStorage.getItem("foto");
+    if (salvada) {
+        fotoImg.src = salvada;
         fotoInput.style.display = "none";
+        trocarBtn.style.display = "block";
     }
+}
 
-    /* SALVAMENTO AUTOMÁTICO */
-    const campos = document.querySelectorAll(".save");
+fotoInput.addEventListener("change", () => {
+    const file = fotoInput.files[0];
+    const reader = new FileReader();
 
-    campos.forEach(c => {
-        const saved = localStorage.getItem(c.id);
-        if (saved !== null) c.value = saved;
+    reader.onload = () => {
+        fotoImg.src = reader.result;
+        localStorage.setItem("foto", reader.result);
 
-        c.addEventListener("input", () => {
-            localStorage.setItem(c.id, c.value);
-        });
-    });
+        fotoInput.style.display = "none";
+        trocarBtn.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+});
+
+trocarBtn.addEventListener("click", () => {
+    fotoInput.style.display = "block";
+    trocarBtn.style.display = "none";
+    fotoInput.click();
+});
+
+carregarFotoSalva();
+
+/* BARRAS DE PV E PS */
+function atualizarBarras() {
+    const pv = document.getElementById("pv").value;
+    const ps = document.getElementById("ps").value;
+
+    document.getElementById("pvBar").style.width = pv + "%";
+    document.getElementById("psBar").style.width = ps + "%";
+}
+
+document.getElementById("pv").addEventListener("input", atualizarBarras);
+document.getElementById("ps").addEventListener("input", atualizarBarras);
+
+atualizarBarras();
 </script>
 
 </body>
