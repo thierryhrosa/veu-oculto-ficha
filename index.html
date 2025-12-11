@@ -3,198 +3,89 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ficha — Véu Oculto RPG</title>
-
+<title>Ficha RPG — Sistema Personalizado</title>
 <style>
-    body {
-        background: #111;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        padding: 20px;
-    }
-
-    h1, h2, h3 {
-        color: #7bcfff;
-        text-align: center;
-    }
-
-    .container {
-        max-width: 850px;
-        margin: auto;
-        background: #1a1a1a;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 0 20px #0af;
-    }
-
-    .section {
-        background: #222;
-        padding: 15px;
-        margin: 15px 0;
-        border-radius: 12px;
-        border-left: 4px solid #0af;
-    }
-
-    label {
-        font-weight: bold;
-    }
-
-    input, textarea {
-        width: 100%;
-        background: #333;
-        color: #fff;
-        padding: 8px;
-        border: none;
-        border-radius: 8px;
-        margin: 6px 0 15px 0;
-    }
-
-    textarea {
-        height: 70px;
-        resize: none;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
-
-    td, th {
-        border: 1px solid #444;
-        padding: 8px;
-        text-align: center;
-        background: #333;
-    }
-
-    th {
-        background: #0a4b7a;
-    }
+  body { font-family: Arial, sans-serif; background: #111; color: #fff; padding: 20px; }
+  h1 { text-align: center; }
+  .card { background: #1a1a1a; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+  label { display:block; margin-top:10px; }
+  input, select { width:100%; padding:8px; border-radius:6px; border:none; margin-top:5px; }
+  .pericia-item { border-bottom:1px solid #333; padding:10px 0; }
+  .bonus { font-weight:bold; margin-top:5px; }
 </style>
 </head>
-
 <body>
-<div class="container">
+<h1>Ficha de Personagem</h1>
 
-<h1>Ficha — Véu Oculto RPG</h1>
-
-<!-- IDENTIDADE -->
-<div class="section">
-    <h2>Identidade</h2>
-    <label>Nome:</label><input>
-    <label>Idade:</label><input>
-    <label>Ocupação:</label><input>
-    <label>Origem / Antecedente:</label><input>
-    <label>Especialidade / Classe:</label><input>
-    <label>Caminho do Oculto:</label><input>
+<div class="card">
+  <h2>Atributos</h2>
+  <label>Força <input type="number" id="forca" value="1" min="1" max="5"></label>
+  <label>Agilidade <input type="number" id="agi" value="1" min="1" max="5"></label>
+  <label>Inteligência <input type="number" id="int" value="1" min="1" max="5"></label>
+  <label>Presença <input type="number" id="pre" value="1" min="1" max="5"></label>
+  <label>Vigor <input type="number" id="vig" value="1" min="1" max="5"></label>
 </div>
 
-<!-- ATRIBUTOS -->
-<div class="section">
-    <h2>Atributos</h2>
-    <table>
-        <tr><th>Atributo</th><th>Valor</th></tr>
-        <tr><td>Força</td><td><input></td></tr>
-        <tr><td>Agilidade</td><td><input></td></tr>
-        <tr><td>Presença</td><td><input></td></tr>
-        <tr><td>Intelecto</td><td><input></td></tr>
-        <tr><td>Vigor</td><td><input></td></tr>
-    </table>
+<div class="card">
+  <h2>Recursos</h2>
+  <label>PV <input type="number" id="pv" value="10"></label>
+  <label>PS (Sanidade) <input type="number" id="ps" value="10"></label>
+  <label>PE (Esperança) <input type="number" id="pe" value="5"></label>
 </div>
 
-<!-- RECURSOS -->
-<div class="section">
-    <h2>Recursos</h2>
-    <table>
-        <tr><th>Recurso</th><th>Fórmula</th><th>Valor</th></tr>
-        <tr><td>PV</td><td>10 + (Vigor × 3)</td><td><input></td></tr>
-        <tr><td>PS (Sanidade)</td><td>10 + (Presença + Intelecto)</td><td><input></td></tr>
-        <tr><td>PE</td><td>Fixos: 5</td><td>5</td></tr>
-    </table>
+<div class="card" id="pericias">
+  <h2>Perícias</h2>
 </div>
 
-<!-- PERICIAS -->
-<div class="section">
-    <h2>Perícias</h2>
+<script>
+const listaPericias = [
+  "Investigação", "Ocultismo", "Furtividade", "Medicina", "Atletismo",
+  "Percepção", "Luta", "Pontaria", "Vontade", "Diplomacia"
+];
 
-    <h3>Força</h3>
-    <label><input type="checkbox"> Atletismo</label><br>
-    <label><input type="checkbox"> Briga</label><br>
-    <label><input type="checkbox"> Intimidação</label><br>
-    <label><input type="checkbox"> Sobrevivência</label><br>
+const graus = {
+  "Destreinado": 0,
+  "Treinado": 5,
+  "Veterano": 10,
+  "Expert": 15
+};
 
-    <h3>Agilidade</h3>
-    <label><input type="checkbox"> Furtividade</label><br>
-    <label><input type="checkbox"> Crime</label><br>
-    <label><input type="checkbox"> Pontaria</label><br>
-    <label><input type="checkbox"> Reflexos</label><br>
+const box = document.getElementById("pericias");
+listaPericias.forEach(pericia => {
+  const div = document.createElement("div");
+  div.className = "pericia-item";
 
-    <h3>Presença</h3>
-    <label><input type="checkbox"> Diplomacia</label><br>
-    <label><input type="checkbox"> Enganação</label><br>
-    <label><input type="checkbox"> Intuição</label><br>
-    <label><input type="checkbox"> Percepção</label><br>
+  div.innerHTML = `
+    <label><input type="checkbox" class="check"> ${pericia}</label>
+    <label>Grau: 
+      <select class="grau">
+        <option>Destreinado</option>
+        <option>Treinado</option>
+        <option>Veterano</option>
+        <option>Expert</option>
+      </select>
+    </label>
+    <div class="bonus">Bônus: <span class="valor">0</span></div>
+  `;
 
-    <h3>Intelecto</h3>
-    <label><input type="checkbox"> Medicina</label><br>
-    <label><input type="checkbox"> Investigação</label><br>
-    <label><input type="checkbox"> Ocultismo</label><br>
-    <label><input type="checkbox"> Tecnologia</label><br>
+  const check = div.querySelector(".check");
+  const grau = div.querySelector(".grau");
+  const valor = div.querySelector(".valor");
 
-    <h3>Vigor</h3>
-    <label><input type="checkbox"> Resistência</label><br>
-    <label><input type="checkbox"> Vigor Físico</label><br>
-    <label><input type="checkbox"> Fôlego</label><br>
-    <label><input type="checkbox"> Tolerância</label><br>
-</div>
+  function atualizar() {
+    if (!check.checked) {
+      valor.textContent = 0;
+      return;
+    }
+    valor.textContent = graus[grau.value];
+  }
 
-<!-- COMBATE -->
-<div class="section">
-    <h2>Combate</h2>
-    <label>Iniciativa:</label><input placeholder="1d20 + Agilidade">
+  check.addEventListener("change", atualizar);
+  grau.addEventListener("change", atualizar);
 
-    <h3>Ataques</h3>
-    <table>
-        <tr><th>Arma</th><th>Dano</th><th>Alcance</th><th>Obs</th></tr>
-        <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
-        <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
-    </table>
-</div>
+  box.appendChild(div);
+});
+</script>
 
-<!-- RITUAIS -->
-<div class="section">
-    <h2>Rituais</h2>
-    <table>
-        <tr><th>Ritual</th><th>Caminho</th><th>Custo</th><th>Efeito</th></tr>
-        <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
-        <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
-    </table>
-</div>
-
-<!-- INVENTÁRIO -->
-<div class="section">
-    <h2>Inventário</h2>
-    <label>Capacidade de Carga:</label><input placeholder="5 + Força">
-
-    <table>
-        <tr><th>Item</th><th>Peso</th><th>Obs</th></tr>
-        <tr><td><input></td><td><input></td><td><input></td></tr>
-        <tr><td><input></td><td><input></td><td><input></td></tr>
-    </table>
-</div>
-
-<!-- TRAUMA -->
-<div class="section">
-    <h2>Tragédia / Trauma</h2>
-    <textarea></textarea>
-</div>
-
-<!-- ANOTAÇÕES -->
-<div class="section">
-    <h2>Anotações</h2>
-    <textarea></textarea>
-</div>
-
-</div>
 </body>
 </html>
